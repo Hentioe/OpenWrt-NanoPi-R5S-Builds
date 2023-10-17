@@ -110,7 +110,7 @@ jobs:
       run: ./openwrt-$OPENWRT_BRANCH/steps/05-create_luci_acl.sh
     
     - name: Load toolchain seed
-      run: ./openwrt-$OPENWRT_BRANCH/steps/06-create_config_from_seed.sh $NANOPI_MODEL full
+      run: ./openwrt-$OPENWRT_BRANCH/steps/06-create_config_from_seed.sh full
         
     - name: Download package
       id: package
@@ -142,7 +142,7 @@ jobs:
     
     - name: Load AO seed (mini)
       if: github.event.inputs.build_mini == 'true'
-      run: ./openwrt-$OPENWRT_BRANCH/steps/06-create_config_from_seed.sh $NANOPI_MODEL mini
+      run: ./openwrt-$OPENWRT_BRANCH/steps/06-create_config_from_seed.sh mini
 
     - name: Build kmods (mini)
       if: github.event.inputs.build_mini == 'true'
@@ -171,7 +171,7 @@ jobs:
     
     - name: Load AO seed (full)
       if: github.event.inputs.build_full == 'true'
-      run: ./openwrt-$OPENWRT_BRANCH/steps/06-create_config_from_seed.sh $NANOPI_MODEL full
+      run: ./openwrt-$OPENWRT_BRANCH/steps/06-create_config_from_seed.sh full
 
     - name: Build kmods (full)
       if: github.event.inputs.build_full == 'true'

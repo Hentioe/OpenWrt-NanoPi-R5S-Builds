@@ -10,13 +10,6 @@ cd "$ROOTDIR/build"
 
 cd openwrt
 # copy R4S in any case, and then patch if R2S
-cp $ROOTDIR/openwrt-23.05/seed/ao-R5S-$2.seed .config
+cp $ROOTDIR/openwrt-23.05/seed/R5S-$1.seed .config
 
-# $1 is model
-# if model == R2S, then patch .config
-#if [[ "$1" == "R2S" ]]; then
-#    echo "NanoPi R2S model, post patching .config"
-#    sed -i 's/nanopi-r4s/nanopi-r2s/' .config
-#    sed -i 's/cortex-a72.cortex-a53/cortex-a53/' .config
-#fi
 make defconfig
