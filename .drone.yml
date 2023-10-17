@@ -27,3 +27,20 @@ steps:
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/07-all_kmods.sh
       # 构建固件
       - (cd build/openwrt && make -j1 V=s)
+
+  - name: copy-r5s-firmware
+    image: hentioe/openwrt-build-base:23.05-ubuntu
+    volumes:
+      - name: dist
+        path: ./dist
+    commands:
+      # 在 dist 目录中创建子目录
+      - mkdir -p ./dist/r5s
+      # 将固件复制到外部
+      - cp build/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-ext4-sysupgrade.img.gz ./dist/r5s/
+      - cp build/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz ./dist/r5s/
+
+volumes:
+  - name: dist
+    host:
+      path: ../openwrt/dist
