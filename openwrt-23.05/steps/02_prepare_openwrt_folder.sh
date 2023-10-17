@@ -15,7 +15,8 @@ cd openwrt
 
 echo "Current OpenWRT commit"
 git log -1
-git describe
+# TODO: 此命令在 Drone CI 中报错：fatal: No names found, cannot describe anything.
+# git describe
 
 # install feeds
 # cd openwrt
