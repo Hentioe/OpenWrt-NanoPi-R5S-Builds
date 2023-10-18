@@ -21,12 +21,12 @@ steps:
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/05-create_luci_acl.sh
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/06-create_config_from_seed.sh full
       # 下载源码包
-      - (cd build/openwrt && make download -j10)
+      - (cd build/openwrt && make download -j10 || { make download -j1 V=s ; exit 1 ; })
       # 构建工具链
-      - (cd build/openwrt && make toolchain/install -j$(nproc))
+      - (cd build/openwrt && make toolchain/install -j$(nproc) || { make toolchain/install -j1 V=s ; exit 1 ; })
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/07-all_kmods.sh
       # 构建固件
-      - (cd build/openwrt && make -j1 V=s)
+      - (cd build/openwrt && make -j$(nproc) || { make -j1 V=s ; exit 1 ; })
 
   - name: copy-r5s-firmware
     image: hentioe/openwrt-build-base:23.05-ubuntu
