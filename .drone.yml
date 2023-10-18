@@ -32,15 +32,21 @@ steps:
     image: hentioe/openwrt-build-base:23.05-ubuntu
     volumes:
       - name: dist
-        path: ./dist
+        path: /dist
     commands:
+      # 定义固件文件名变量
+      - export EXT4_SYSUPGRADE_IMG_GZ=openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-ext4-sysupgrade.img.gz
+      - export SQUASHFS_SYSUPGRADE_IMG_GZ=openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz
+      # 输出 sha256sum
+      - sha256sum build/openwrt/bin/targets/rockchip/armv8/$${EXT4_SYSUPGRADE_IMG_GZ}
+      - sha256sum build/openwrt/bin/targets/rockchip/armv8/$${SQUASHFS_SYSUPGRADE_IMG_GZ}
       # 在 dist 目录中创建子目录
-      - mkdir -p ./dist/r5s
+      - mkdir -p /dist/r5s
       # 将固件复制到外部
-      - cp build/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-ext4-sysupgrade.img.gz ./dist/r5s/
-      - cp build/openwrt/bin/targets/rockchip/armv8/openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-squashfs-sysupgrade.img.gz ./dist/r5s/
+      - cp build/openwrt/bin/targets/rockchip/armv8/$${EXT4_SYSUPGRADE_IMG_GZ} /dist/r5s/
+      - cp build/openwrt/bin/targets/rockchip/armv8/$${SQUASHFS_SYSUPGRADE_IMG_GZ} /dist/r5s/
 
 volumes:
   - name: dist
     host:
-      path: ../openwrt/dist
+      path: /home/hentioe/openwrt/dist
