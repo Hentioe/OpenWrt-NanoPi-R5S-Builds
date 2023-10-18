@@ -10,33 +10,9 @@ OPENWRT_BRANCH=23.05
 
 cd "$ROOTDIR/build"
 
-# clone stangri repo
-rm -rf stangri_repo
-git clone https://github.com/stangri/source.openwrt.melmac.net stangri_repo
-
 # install feeds
 cd openwrt
-./scripts/feeds update -a
-
-# replace pbr packages
-rm -rf feeds/packages/net/pbr/
-cp -R ../stangri_repo/pbr feeds/packages/net/
-rm -rf feeds/luci/applications/luci-app-pbr
-cp -R ../stangri_repo/luci-app-pbr feeds/luci/applications/
-
-# replace acme & haproxy with newer versions taken from master
-#rm -rf feeds/packages/net/acme*
-#cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/acme* feeds/packages/net/
-
-# replace haproxy with package with fix for optimized arm compilation
-rm -rf feeds/packages/net/haproxy
-cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/haproxy* feeds/packages/net/
-
-# replace adguardhome with prebuilt latest version
-rm -rf feeds/packages/net/adguardhome
-cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/adguardhome feeds/packages/net/
-
-./scripts/feeds update -i && ./scripts/feeds install -a
+./scripts/feeds update -a && ./scripts/feeds install -a
 
 # Time stamp with $Build_Date=$(date +%Y.%m.%d)
 MANUAL_DATE="$(date +%Y.%m.%d)"

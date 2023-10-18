@@ -9,7 +9,6 @@ fi
 cd "$ROOTDIR/build"
 
 cd openwrt
-# copy R4S in any case, and then patch if R2S
 cp $ROOTDIR/openwrt-23.05/seed/R5S-$1.seed .config
 
 make defconfig

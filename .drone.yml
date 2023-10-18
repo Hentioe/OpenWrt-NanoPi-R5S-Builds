@@ -18,12 +18,9 @@ steps:
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/02_prepare_openwrt_folder.sh
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/03_patch_openwrt.sh
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/04-prepare_package.sh
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/05-create_luci_acl.sh
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/06-create_config_from_seed.sh full
       # 下载源码包
       - (cd build/openwrt && make download -j10 || { make download -j1 V=s ; exit 1 ; })
-      # 构建工具链
-      - (cd build/openwrt && make toolchain/install -j$(nproc) || { make toolchain/install -j1 V=s ; exit 1 ; })
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/07-all_kmods.sh
       # 构建固件
       - (cd build/openwrt && make -j$(nproc) || { make -j1 V=s ; exit 1 ; })
