@@ -37,11 +37,9 @@ steps:
       # 输出 sha256sum
       - sha256sum build/openwrt/bin/targets/rockchip/armv8/$${EXT4_SYSUPGRADE_IMG_GZ}
       - sha256sum build/openwrt/bin/targets/rockchip/armv8/$${SQUASHFS_SYSUPGRADE_IMG_GZ}
-      # 在 dist 目录中创建子目录
-      - mkdir -p /dist/r5s
       # 将固件复制到外部
-      - cp build/openwrt/bin/targets/rockchip/armv8/$${EXT4_SYSUPGRADE_IMG_GZ} /dist/r5s/
-      - cp build/openwrt/bin/targets/rockchip/armv8/$${SQUASHFS_SYSUPGRADE_IMG_GZ} /dist/r5s/
+      - cp build/openwrt/bin/targets/rockchip/armv8/$${EXT4_SYSUPGRADE_IMG_GZ} /dist/
+      - cp build/openwrt/bin/targets/rockchip/armv8/$${SQUASHFS_SYSUPGRADE_IMG_GZ} /dist/
 
 volumes:
   - name: dist
