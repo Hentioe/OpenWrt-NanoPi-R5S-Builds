@@ -14,16 +14,12 @@ cd "$ROOTDIR/build"
 cd openwrt
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
-# Time stamp with $Build_Date=$(date +%Y.%m.%d)
-MANUAL_DATE="$(date +%Y.%m.%d)"
-COMMENT="based on Anael Orlinski's build scripts"
-BUILD_STRING=${BUILD_STRING:-$MANUAL_DATE}
+COMMENT="based on Anael Orlinski's scripts"
+# Time stamp with $(date +%Y.%m.%d)
+BUILD_DATE="$(date +%Y.%m.%d)"
 echo "Write build date in openwrt : $BUILD_DATE"
-echo -e '\nBuilt by Hentioe on '${BUILD_STRING} \(${COMMENT}\)'\n'  >> package/base-files/files/etc/banner
-#sed -i '/DISTRIB_REVISION/d' package/base-files/files/etc/openwrt_release
-#echo "DISTRIB_REVISION='${BUILD_STRING}'" >> package/base-files/files/etc/openwrt_release
+echo -e '\nBuilt by Hentioe on '${BUILD_DATE} \(${COMMENT}\)'\n' >>package/base-files/files/etc/banner
 sed -i '/DISTRIB_DESCRIPTION/d' package/base-files/files/etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='Built by Hentioe on ${BUILD_STRING}'" >> package/base-files/files/etc/openwrt_release
-#sed -i '/luciversion/d' feeds/luci/modules/luci-base/luasrc/version.lua
+echo "DISTRIB_DESCRIPTION='Built by Hentioe on ${BUILD_DATE}'" >>package/base-files/files/etc/openwrt_release
 
 rm -rf .config
