@@ -7,6 +7,11 @@ steps:
   - name: build-r5s-full
     image: hentioe/openwrt-build-base:23.05-ubuntu
     pull: always
+    when:
+      branch:
+        - main
+      event:
+        - push
     commands:
       # 修正仓库文件权限
       - sudo chown -R 1000:1000 .
@@ -30,6 +35,11 @@ steps:
     volumes:
       - name: dist
         path: /dist
+    when:
+      branch:
+        - main
+      event:
+        - push
     commands:
       # 定义固件文件名变量
       - export EXT4_SYSUPGRADE_IMG_GZ=openwrt-rockchip-armv8-friendlyarm_nanopi-r5s-ext4-sysupgrade.img.gz
