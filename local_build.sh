@@ -3,7 +3,7 @@
 export OPENWRT_BRANCH=23.05
 
 # 清理构建目录
-rm -rfi ./build
+rm -rf ./build
 
 # 开始执行完整的构建步骤
 ./openwrt-${OPENWRT_BRANCH}/steps/01_clone_openwrt.sh
