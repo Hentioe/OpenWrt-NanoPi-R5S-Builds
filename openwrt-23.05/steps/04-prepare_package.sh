@@ -19,7 +19,7 @@ cp -r $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/simple-obfs package/netwo
 # update & install feeds
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
-COMMENT="based on Anael Orlinski's scripts"
+COMMENT="based on Anael Orlinski's scripts/patches"
 # Time stamp with $(date +%Y.%m.%d)
 BUILD_DATE="$(date +%Y.%m.%d)"
 echo "Write build date in openwrt : $BUILD_DATE"
