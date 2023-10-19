@@ -8,10 +8,15 @@ fi
 
 OPENWRT_BRANCH=23.05
 
-cd "$ROOTDIR/build"
+# Into root dir
+cd "$ROOTDIR/build/openwrt"
 
-# install feeds
-cd openwrt
+# Add simple-obfs
+echo "Adding simple-obfs ..."
+rm -rf package/network/simple-obfs
+cp -r $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/simple-obfs package/network/simple-obfs
+
+# update & install feeds
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
 COMMENT="based on Anael Orlinski's scripts"
