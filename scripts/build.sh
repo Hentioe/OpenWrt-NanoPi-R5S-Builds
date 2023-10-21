@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-# 此脚本用于本地构建测试。执行前会进行清理，不会保留上次构建的结果。
+# 此脚本用于本地构建测试。运行前建议执行 clean-full.sh 进行完整清理，因为当前的构建步骤脚本无法保证多次执行后的正确性。
 export OPENWRT_BRANCH=23.05
-
-# 清理构建目录
-rm -rf ./build
 
 # 开始执行完整的构建步骤
 ./openwrt-${OPENWRT_BRANCH}/steps/01_clone_openwrt.sh
