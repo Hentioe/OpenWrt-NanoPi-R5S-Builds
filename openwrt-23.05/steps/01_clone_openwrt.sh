@@ -1,20 +1,16 @@
-#!/bin/bash
-ROOTDIR=$(pwd)
-echo $ROOTDIR
-if [ ! -e "$ROOTDIR/LICENSE" ]; then
-    echo "Please run from root"
-    exit 1
-fi
+#!/usr/bin/env bash
+# 克隆特定分支的原始仓库，输出最新的提交信息。
 
+ROOTDIR=$(pwd)
+# 创建构建目录
+echo "Creating build directory..."
 cd $ROOTDIR
 mkdir build
 cd build
 
-OPENWRT_FOLDER=openwrt-fresh-23.05
+# 克隆 OpenWRT 仓库
+git clone -b openwrt-23.05 --depth=1 https://git.openwrt.org/openwrt/openwrt.git openwrt
 
-git clone -b openwrt-23.05 --depth=1 https://git.openwrt.org/openwrt/openwrt.git $OPENWRT_FOLDER
-#git clone --single-branch https://git.openwrt.org/openwrt/openwrt.git $OPENWRT_FOLDER
-
-cd $OPENWRT_FOLDER
-echo "Current OpenWRT commit"
-git log -1
+# 输出最新的提交信息
+echo "Latest OpenWrt commit:"
+(cd openwrt && git log -1)

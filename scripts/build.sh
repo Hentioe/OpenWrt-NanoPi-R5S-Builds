@@ -4,7 +4,6 @@ export OPENWRT_BRANCH=23.05
 
 # 开始执行完整的构建步骤
 ./openwrt-${OPENWRT_BRANCH}/steps/01_clone_openwrt.sh
-./openwrt-${OPENWRT_BRANCH}/steps/02_prepare_openwrt_folder.sh
 ./openwrt-${OPENWRT_BRANCH}/steps/03_patch_openwrt.sh
 ./openwrt-${OPENWRT_BRANCH}/steps/04-prepare_package.sh
 ./openwrt-${OPENWRT_BRANCH}/steps/06-create_config_from_seed.sh full

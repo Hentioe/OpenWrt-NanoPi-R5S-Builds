@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 ROOTDIR=$(pwd)
 echo $ROOTDIR
 if [ ! -e "$ROOTDIR/build" ]; then
