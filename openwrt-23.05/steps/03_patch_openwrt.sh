@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
 
 ROOTDIR=$(pwd)
-echo $ROOTDIR
-if [ ! -e "$ROOTDIR/build" ]; then
-    echo "Please run from root / no build dir"
-    exit 1
-fi
-
 BUILDDIR="$ROOTDIR/build"
+OPENWRT_BRANCH=23.05
 
 cd "$BUILDDIR/openwrt"
-OPENWRT_BRANCH=23.05
 
 # -------------- UBOOT -----------------------------------
 # replace uboot with local uboot package
@@ -23,7 +17,6 @@ cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/uboot-rockchip package/bo
 # this version does not need arm-trusted-firmware-rk3328
 rm -rf package/boot/arm-trusted-firmware-rockchip
 cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/arm-trusted-firmware-rockchip package/boot/
-
 
 # -------------- target linux/rockchip ----------------
 rm -rf target/linux/rockchip
@@ -54,16 +47,13 @@ ADDON_PATH='snd-usb-caiaq.makefileaddon'
 ADDON_DEST='package/kernel/linux/modules/usb.mk'
 if ! grep -q " --- $ADDON_PATH" $ADDON_DEST; then
    echo "Adding $ADDON_PATH to $ADDON_DEST"
-   echo "# --- $ADDON_PATH" >> $ADDON_DEST
-   cat $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/$ADDON_PATH >> $ADDON_DEST
+   echo "# --- $ADDON_PATH" >>$ADDON_DEST
+   cat $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/$ADDON_PATH >>$ADDON_DEST
 else
    echo "Already added $ADDON_PATH to $ADDON_DEST"
 fi
 
-# revert to fresh config
-cp $BUILDDIR/openwrt-fresh-$OPENWRT_BRANCH/target/linux/generic/config-5.15 target/linux/generic/config-5.15
-
-cat << "EOF" >> target/linux/generic/config-5.15
+cat <<"EOF" >>target/linux/generic/config-5.15
 # CONFIG_IR_ENE is not set
 # CONFIG_IR_FINTEK is not set
 # CONFIG_IR_GPIO_TX is not set
