@@ -21,12 +21,12 @@ steps:
       - "echo Build user: `whoami`"
       - "echo Build branch: $${OPENWRT_BRANCH}"
       - bash ./openwrt-$${OPENWRT_BRANCH}/steps/01_clone_openwrt.sh
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/03_patch_openwrt.sh
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/04-prepare_package.sh
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/06-create_config_from_seed.sh full
+      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/02_patch_openwrt.sh
+      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/03-prepare_package.sh
+      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/04-create_config_from_seed.sh full
       # 下载源码包
       - (cd build/openwrt && make download -j10 || { make download -j1 V=s ; exit 1 ; })
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/07-all_kmods.sh
+      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/05-all_kmods.sh
       # 构建固件
       - (cd build/openwrt && make -j$(nproc) || { make -j1 V=s ; exit 1 ; })
 
