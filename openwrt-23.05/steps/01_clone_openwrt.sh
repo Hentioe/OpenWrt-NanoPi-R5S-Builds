@@ -12,7 +12,7 @@ mkdir build
 cd build
 
 # 克隆 OpenWRT 仓库
-git clone -b openwrt-$OPENWRT_BRANCH --depth 1 --branch v23.05.2 https://git.openwrt.org/openwrt/openwrt.git openwrt
+git clone -b openwrt-$OPENWRT_BRANCH --depth=1 https://git.openwrt.org/openwrt/openwrt.git openwrt
 
 # 输出最新的提交信息
 echo "Latest OpenWrt commit:"

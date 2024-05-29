@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Deleting build folder..."
+# 删除构建目录中……
+echo "Deleting build directory..."
 
 rm -rf ./build
 
-echo "Done"
+# 清理完成
+echo "Cleaned up."

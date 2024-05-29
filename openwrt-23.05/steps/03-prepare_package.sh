@@ -6,13 +6,21 @@ OPENWRT_BRANCH=23.05
 
 cd "$ROOTDIR/build/openwrt"
 
+# Update feeds
+./scripts/feeds update -a
+
 # Add simple-obfs
 echo "Adding simple-obfs ..."
 rm -rf package/network/simple-obfs
 cp -r $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/simple-obfs package/network/simple-obfs
 
-# update & install feeds
-./scripts/feeds update -a && ./scripts/feeds install -a
+# replace libpfring that fails compiling
+echo "Replacing libpfring ..."
+rm -rf feeds/packages/libs/libpfring
+cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/libpfring feeds/packages/libs/
+
+# install feeds
+./scripts/feeds update -i && ./scripts/feeds install -a
 
 COMMENT="full"
 # Time stamp with $(date +%Y.%m.%d)
