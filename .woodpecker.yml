@@ -9,7 +9,7 @@ when:
     event: push
 
 steps:
-  prepare-full-env:
+  prepare:
     image: hentioe/openwrt-build-base:23.05-ubuntu
     pull: true
     commands:
@@ -20,23 +20,16 @@ steps:
       - "echo Build branch: $${OPENWRT_BRANCH}"
       - export HOME=/home/openwrt-builder
       - "echo User home: $${HOME}"
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/01_clone_openwrt.sh
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/02_patch_openwrt.sh
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/03-prepare_package.sh
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/04-create_config_from_seed.sh full
-      # 下载源码包
-      - (cd build/openwrt && make download -j10 || { make download -j1 V=s ; exit 1 ; })
-      - bash ./openwrt-$${OPENWRT_BRANCH}/steps/05-all_kmods.sh
+      - ./scripts/prepare.sh
 
-  # 构建固件
-  build-full-firmware:
+  build:
     image: hentioe/openwrt-build-base:23.05-ubuntu
     commands:
       - export HOME=/home/openwrt-builder
       - "echo User home: $${HOME}"
-      - (cd build/openwrt && make -j$(nproc) || { make -j1 V=s ; exit 1 ; })
+      - ./scripts/build.sh
 
-  copy-to-dist:
+  copy-artifacts:
     image: hentioe/openwrt-build-base:23.05-ubuntu
     commands:
       # 预定义变量
