@@ -30,9 +30,6 @@ cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/target/linux/rockchip target/linu
 
 # ------------------ packages ------------------------------------
 
-# r8125 driver for r5s
-cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/r8125 package/kernel/
-
 # video modules
 rm -rf package/kernel/linux/modules/video.mk
 cp $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/kernel/linux/modules/video.mk package/kernel/linux/modules/

@@ -14,11 +14,6 @@ echo "Adding simple-obfs ..."
 rm -rf package/network/simple-obfs
 cp -r $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/simple-obfs package/network/simple-obfs
 
-# replace libpfring that fails compiling
-echo "Replacing libpfring ..."
-rm -rf feeds/packages/libs/libpfring
-cp -R $ROOTDIR/openwrt-$OPENWRT_BRANCH/patches/package/libpfring feeds/packages/libs/
-
 # install feeds
 ./scripts/feeds update -i && ./scripts/feeds install -a
 
