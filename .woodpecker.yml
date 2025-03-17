@@ -1,0 +1,34 @@
+when:
+  - branch: [main]
+    event: [push, cron]
+
+variables:
+  - &build_base "hentioe/openwrt-build-base:24.10-ubuntu"
+
+steps:
+  setup:
+    image: *build_base
+    pull: true
+    commands:
+      - sudo chown -R 1000:1000 .
+      - export OPENWRT_BRANCH=24.10
+      - "echo Build branch: *openwrt_branch"
+      - export HOME=/home/openwrt-builder
+      - "echo User home: $${HOME}"
+
+  build:
+    image: *build_base
+    commands:
+      - scripts/build.sh 24.10 full
+
+  checksums:
+    image: *build_base
+    commands:
+      - scripts/checksums.sh 24.10 full
+
+  copy-artifacts:
+    image: *build_base
+    commands:
+      - scripts/copy-attifacts.sh 24.10 full /dist/ # 复制到 dist 目录
+    volumes:
+      - ${APPS_HOME}/openwrt/dist:/dist

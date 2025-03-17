@@ -14,5 +14,5 @@ cd build
 git clone -b $OPENWRT_BRANCH --depth=1 https://git.openwrt.org/openwrt/openwrt.git openwrt
 
 # 输出最新的提交信息
-echo "Latest OpenWrt commit:"
+echo "Latest $OPENWRT_BRANCH commit:"
 (cd openwrt && git log -1)
