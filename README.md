@@ -19,7 +19,7 @@ _本项目是补丁、构建脚本、CI 配置的集合。_
 
 ## 定制
 
-- 基础环境：LuCI 基础包、中文语言、Material 主题、外部挂载支持等。
+- 基本环境：LuCI 基础包、中文语言、Material 主题、外部挂载支持等。
 - 容器化支持
   - LXC
   - Docker
@@ -31,21 +31,23 @@ _本项目是补丁、构建脚本、CI 配置的集合。_
 - 统计支持
   - collectd 及大量插件
   - vnstat2
+  - nlbwmon
 - 实用工具
   - frp
   - DDNS
 - 实用控制功能
-  - SQM 队列
+  - SQM
   - QoS
 - 网络优化
   - TCP BBR
-- 有其它有用工具集
+  - zram
+- 其它有用工具集
 
 ## 关联文章
 
 参考这些文章，可以理解本项目为何会定制某些内容。也可以让 R5S 发挥更大的作用。
 
-- [OpenWrt 入门：构建自己的镜像（NanoPi R5S 为例）](https://blog.hentioe.dev/posts/openwrt-getting-started-build-your-own-image.html)
+- [OpenWrt 入门：从源码构建自己的固件（NanoPi R5S 为例）](https://blog.hentioe.dev/posts/openwrt-getting-started-build-your-own-image.html)
 - [知乎回答：OpenWrt 能做哪些有趣的事？](https://www.zhihu.com/question/568604090/answer/3251350523)
 
 ## 结束语
