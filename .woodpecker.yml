@@ -29,6 +29,7 @@ steps:
   copy-artifacts:
     image: *build_base
     commands:
+      - scripts/backup-previous.sh 24.10 /dist/ /dist/histories/ # 备份历史构建
       - scripts/copy-attifacts.sh 24.10 full /dist/ # 复制到 dist 目录
     volumes:
       - ${APPS_HOME}/openwrt/dist:/dist
