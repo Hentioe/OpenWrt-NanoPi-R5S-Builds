@@ -6,6 +6,12 @@ OPENWRT_BRANCH=$1
 # 读取第二个参数（seed 名）
 SEED_NAME=$2
 
+# 检查两个参数是否传递
+if [ -z "$OPENWRT_BRANCH" ] || [ -z "$SEED_NAME" ]; then
+  echo "Usage: $0 <openwrt-branch> <seed-name>"
+  exit 1
+fi
+
 ROOT_PATH=$(pwd)
 
 # 执行通用步骤
