@@ -11,7 +11,7 @@ steps:
     pull: true
     commands:
       - sudo chown -R 1000:1000 .
-      - export OPENWRT_BRANCH=24.10
+      - export OPENWRT_BRANCH=25.12
       - "echo Build branch: *openwrt_branch"
       - export HOME=/home/openwrt-builder
       - "echo User home: $${HOME}"
@@ -19,17 +19,17 @@ steps:
   build:
     image: *build_base
     commands:
-      - scripts/build.sh 24.10 full
+      - scripts/build.sh 25.12 full
 
   checksums:
     image: *build_base
     commands:
-      - scripts/checksums.sh 24.10 full
+      - scripts/checksums.sh 25.12 full
 
   copy-artifacts:
     image: *build_base
     commands:
-      - scripts/backup-previous.sh 24.10 /dist/ /dist/histories/ # 备份历史构建
-      - scripts/copy-attifacts.sh 24.10 full /dist/ # 复制到 dist 目录
+      - scripts/backup-previous.sh 25.12 /dist/ /dist/histories/ # 备份历史构建
+      - scripts/copy-attifacts.sh 25.12 full /dist/ # 复制到 dist 目录
     volumes:
       - ${APPS_HOME}/openwrt/dist:/dist
